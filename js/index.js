@@ -10,6 +10,13 @@ async function fetchWeather(region){
 ////
 
 
+////  calculate GoB value to decide going out or not
+function calculateGoB(){
+
+}
+////
+
+
 //// update information while user press any other region
 function changeReigon() {
     let region = document.querySelector("#region-list").value;
