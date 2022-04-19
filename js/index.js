@@ -1,7 +1,6 @@
 //// Initalize js file
 console.log('Hello');
 
-
 //// reorganize data structure
 function getFinalData(data, date){
     let accurateDate;
@@ -92,17 +91,29 @@ function calculateGoB(weatherInfo, date){
 
 
 //// update information while user press any other region
-function changeReigon() {
-    let region = document.querySelector("#region-list").value;
+async function changeReigon(region_btn) {
+    let region = region_btn.innerText;
 
     let weatherData = {
         regionWeather: null,
         GoB: null
     };
 
-    // weatherData.regionWeather = fetchWeather(region);
-    // weatherData.GoB = calculateGoB(weatherInfo);
+    weatherData.regionWeather = await fetchWeather(region);
+    weatherData.GoB = calculateGoB(weatherData.regionWeather, "today");
+
+    console.log(weatherData);
 
     // render(weatherData);
 }
 ////
+
+
+let regionBtns = document.getElementsByClassName('region');
+for(let i = 0; i < regionBtns.length; i++){
+    regionBtns[i].addEventListener('click', function(){
+        changeReigon(regionBtns[i]);
+    })
+}
+
+
