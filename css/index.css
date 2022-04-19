@@ -1,3 +1,251 @@
-h1{
-    color: blue;
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@300;400;700;900&display=swap');
+
+h1,h2,h3,h4,h5,h6,header,nav,footer,ul,li,p,body{
+    margin: 0;
+    padding: 0;
+}
+
+
+body{
+    font-size: 18px;
+    background-color: #F4F5ED;
+    color:#D14C4F;
+    font-weight: 900;
+    font-family: 'Noto Serif TC', serif;
+}
+
+.container{
+    width: 84%;
+    margin: auto;
+    padding: 30px 0;
+}
+
+.header{
+    background-color: #D14C4F;
+    height: 80px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.title{
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #F4F5ED;
+    line-height: 80px;
+    letter-spacing: 1px;
+}
+
+.circle{
+    background-color: #F3DC9A;
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+}
+
+.subtitle{
+    text-align: center;
+    font-size: 0.9rem;
+    font-weight: 400;
+    grid-area: subtitle;
+    letter-spacing: 1px;
+}
+
+.month{
+    font-size: 45px;
+    grid-area: month;
+}
+
+.month::after{
+    content: "月";
+    font-size: 1rem;
+    padding-left: 5px;
+}
+
+.regionNow{
+    writing-mode: vertical-lr;
+    font-size: 30px;
+    letter-spacing: 10px;
+    grid-area: region;
+    display: block;
+}
+
+.regionNow::after{
+    content:"▲";
+    font-size: 18px;
+}
+
+.regionNow.active::after{
+    content:"▼";
+    font-size: 18px;
+}
+
+
+.weatherDataBlock{
+    font-weight: 300;
+    font-size: 16px;
+    border-top: 3px solid #D14C4F;
+    grid-area: data;
+    margin-top: 30px;
+    margin-left: 20px
+}
+.CI{
+    border-bottom: 1px solid #D14C4F;
+}
+
+.Wx,.T,.PoP,.CI{
+    border-top: 1px solid #D14C4F;
+    padding: 1px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.Wx::before{
+    content: "天氣現象";
+    text-align: left;
+}
+
+.T::before{
+    content: "最高溫 / 最低溫";
+    display: inline-block;
+}
+
+.PoP::before{
+    content: "降雨機率";
+}
+
+.CI::before{
+    content: "舒適度";
+}
+
+.date{
+    font-size: 120px;
+    grid-area: date;
+    line-height: 120px;
+    align-self: center;
+    justify-self: center;
+}
+
+
+.good,.bad{
+    text-align: center;
+    padding: 3px 8px;
+    display: flex;
+    justify-content: space-around;
+}
+
+.good{
+    line-height: 65px;
+    background-color: #D14C4F;
+    border-radius: 50px;
+    color: #F4F5ED;
+    font-size: 30px;
+    grid-area: good;
+    
+}
+
+.bad{
+    font-size: 20px;
+    padding: 5px 10px;
+    grid-area: bad;
+    align-self: center;
+}
+
+.good::before{
+    content: "宜";
+}
+
+.bad::before{
+    content: "忌";
+}
+
+
+.goTmrBtn>a{
+    display: flex;
+    justify-content: end;
+}
+
+.regionMenu.active{
+    opacity: 1;
+    transition: all .3s;
+}
+
+.region{
+    padding: 11px 10px;
+    text-align: center;
+}
+
+.region :hover{
+    color:#D14C4F;
+}
+
+/* Grid Layout - parents*/
+.regionMenu{
+    width: 100%;
+    margin:auto;
+    padding:20px 5px;
+    box-sizing: border-box;
+    background-color: #252525cb;
+    color: #F4F5ED;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    font-weight: 700;
+    z-index: 10;
+    opacity: 0;
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+}
+
+
+.mainContent{
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    grid-template-rows: auto;
+    grid-template-areas: "subtitle subtitle subtitle"
+                         "month    data data"
+                         "region data data"
+                         ".     date ."
+                         "good     good good"
+                         "bad      bad  bad";
+    grid-row-gap: 20px;
+}
+
+
+
+/* larger device - above 768px */
+@media screen and (min-width: 768px) {
+    .mainContent{
+        /* display: grid; */
+        grid-template-columns: 0.5fr 1.5fr 1fr 1fr;
+        grid-template-rows: auto;
+        grid-template-areas: "subtitle subtitle subtitle subtitle"
+                             "month    .        .        ."
+                             "region date     data     data"
+                             "lregion date     data     data"
+                             "good     good     .      bad"
+                             "regionmenu regionmenu regionmenu regionmenu";
+        /* grid-row-gap: 10px; */
+        align-items: stretch;
+    }
+    .regionNow::after{
+        display: none;
+    }
+    .regionMenu{
+        grid-template-columns: repeat(5,1fr);
+        opacity: 1;
+        margin-top:30px;
+        position:static;
+        background-color: #F4F5ED;
+        border-top: 3px solid #3d3d3d;
+        border-bottom: 1px solid #3d3d3d;
+        width: 83%;
+    }
+    .region{
+        color: #252525;
+    }
+    .weatherDataBlock{
+        margin-left: 40px;
+    }
 }
