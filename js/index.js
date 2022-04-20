@@ -58,7 +58,7 @@ function calculateGoB(weatherData){
         }
     }else if(GoB >4 && GoB <7){
         recommendation = {
-            "good": ["睡到十點", "超市買泡麵", "看彭彭 YouTube 教學", "素顏出門", "不洗頭", "出門逛街"],
+            "good": ["睡到十點", "超市買泡麵", "看彭彭 YT 教學", "素顏出門", "不洗頭", "出門逛街"],
             "bad": ["睡到中午", "出門太久", "去海邊玩", "去基隆玩", "騎車出門", "出門不帶雨傘"],
         }
     }else{
