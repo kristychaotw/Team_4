@@ -1,73 +1,53 @@
 //// Initalize js file
 console.log('Hello');
-
-
-//// reorganize data structure
-function getFinalData(data, date){
-    let accurateDate;
-    const final = data.map((item) => {
-        const {startTime, endTime, parameter} = item;
-        if(date === 'today'){
-            accurateDate = startTime.slice(0,10);
-        }else{
-            accurateDate = endTime.slice(0,10);
-        }
-        return parameter
-    })
-    return {'data': final, 'date': accurateDate}
-}
 ////
 
 
-//// fetch weather information
-async function fetchWeather(region){
+//////////////////////////////////// Model ////////////////////////////////////
+//// fetch weather information, needs to decide get today or tomorrow
+//// today = 0; tomorrow = 1
+async function fetchWeather(region, day){
     let url = `https://opendata.cwb.gov.tw/api/v1/rest/datastore/F-C0032-001?Authorization=CWB-281D376F-126F-4682-B710-E57FE26A8431&locationName=${region}`;
+    let accurateDate;
 
     const response = await fetch(url);
     const rawData = await response.json();
 
     const records = rawData['records']['location'][0]['weatherElement'];
-    const Wx = records[0]['time'].slice(0,2);
-    const PoP = records[1]['time'].slice(0,2);
-    const MinT = records[2]['time'].slice(0,2);
-    const CI = records[3]['time'].slice(0,2);
-    const MaxT = records[4]['time'].slice(0,2);
+    const Wx = records[0]['time'][day];
+    const PoP = records[1]['time'][day];
+    const MinT = records[2]['time'][day];
+    const CI = records[3]['time'][day];
+    const MaxT = records[4]['time'][day];
 
-    const today = [Wx[0], PoP[0], MinT[0], CI[0], MaxT[0]];
-    const {data:todayData, date:todayDate} = getFinalData(today, 'today');
+    const regionWeather = [Wx, PoP, MinT, CI, MaxT];
 
-    const tomorrow = [Wx[1], PoP[1], MinT[1], CI[1], MaxT[1]];
-    const {data:tomorrowData, date:tomorrowDate} = getFinalData(tomorrow, 'tomorrow');
-
+    const wetherData = regionWeather.map((item) => {
+        const {startTime, endTime, parameter} = item;
+        accurateDate = day===0? startTime.slice(0,10):endTime.slice(0,10);
+        return parameter
+    })
+    
     const weatherInfo = {
-        "today": {
-            "date": todayDate,
-            "Wx": todayData[0],
-            "PoP": todayData[1],
-            "MinT": todayData[2],
-            "CI": todayData[3],
-            "MaxT": todayData[4]
-        },
-        "tomorrow": {
-            "date": tomorrowDate,
-            "Wx": tomorrowData[0],
-            "PoP": tomorrowData[1],
-            "MinT": tomorrowData[2],
-            "CI": tomorrowData[3],
-            "MaxT": tomorrowData[4],
-        }
+        "region": region,
+        "date": accurateDate,
+        "Wx": wetherData[0],
+        "PoP": wetherData[1],
+        "MinT": wetherData[2],
+        "CI": wetherData[3],
+        "MaxT": wetherData[4],
     }
+
     return weatherInfo
 }
 ////
 
 
 ////  calculate GoB value to decide going out or not
-function calculateGoB(weatherInfo, date){
-    const data = weatherInfo[`${date}`];
-    const wx = Number(data['Wx']['parameterValue']) * 4;
-    const diff = Number(data['MaxT']['parameterName'] - data['MinT']['parameterName']) * 1;
-    const pop = Number(data['PoP']['parameterName']) / 10 * 5;
+function calculateGoB(weatherData){
+    const wx = Number(weatherData['Wx']['parameterValue']) * 4;
+    const diff = Number(weatherData['MaxT']['parameterName'] - weatherData['MinT']['parameterName']) * 1;
+    const pop = Number(weatherData['PoP']['parameterName']) / 10 * 5;
     const GoB = (wx + diff + pop) / 10;
 
     if(GoB <= 4){
@@ -91,18 +71,88 @@ function calculateGoB(weatherInfo, date){
 ////
 
 
-//// update information while user press any other region
-function changeReigon() {
-    let region = document.querySelector("#region-list").value;
+//// controller ONLY needs to call this function to get all weather info
+//// e.g. getViewData("高雄市", 0); today = 0; tomorrow = 1
+async function getViewData(region, day){
+    const weatherData = await fetchWeather(region, day);
+    const GoB = calculateGoB(weatherData);
 
-    let weatherData = {
-        regionWeather: null,
-        GoB: null
-    };
-
-    // weatherData.regionWeather = fetchWeather(region);
-    // weatherData.GoB = calculateGoB(weatherInfo);
-
-    // render(weatherData);
+    const weatherInfo = {
+        "regionWeather": {
+            "region": weatherData['region'],
+            "Wx": weatherData['Wx']['parameterName'],
+            "MaxT": Number(weatherData['MaxT']['parameterName']),
+            "MinT": Number(weatherData['MinT']['parameterName']),
+            "PoP": Number(weatherData['PoP']['parameterName']),
+            "confort": weatherData['CI']['parameterName'],
+            "date": {
+                "month": Number(weatherData['date'].slice(5,7)),
+                "date": Number(weatherData['date'].slice(8,10))
+            },
+            "GoB": GoB
+        }
+    }
+    return weatherInfo
 }
 ////
+////////////////////////////////////////////////////////////////////////
+
+
+//////////////////////////////////// View ////////////////////////////////////
+function render(weatherData) {
+    console.log(weatherData);
+}
+////////////////////////////////////////////////////////////////////////
+
+
+//////////////////////////////////// Controller ////////////////////////////////////
+// update information while user click on any other region
+async function changeReigon(regionBtn) {
+    const region = regionBtn.innerText;
+    const weatherData = await getViewData(region, 0);
+
+    render(weatherData);
+}
+////
+
+
+//// update information while user click on goTmrBtn
+async function changeDate(goTmrBtn) {
+    const region = document.querySelector('.regionNow').innerText;
+    const day = goTmrBtn.id;
+    goTmrBtn.id = (day==='0') ? '1': '0';
+    
+    const weatherData = await getViewData(region, day);
+
+    render(weatherData);
+}
+////
+
+
+//// initialize page contents
+async function initializePage() {
+    const weatherData = await getViewData("高雄市", 0);
+
+    render(weatherData);
+}
+////
+
+
+//// after DOM contents are loaded, start to query interactable elements
+document.addEventListener("DOMContentLoaded",  () => {
+    initializePage();
+
+    let regionBtns = document.querySelectorAll('.region');
+    for(let i = 0; i < regionBtns.length; i++){
+        regionBtns[i].addEventListener('click', function(){
+            changeReigon(regionBtns[i]);
+        });
+    }
+
+    let goTmrBtn = document.querySelector('.goTmrBtn');
+    goTmrBtn.addEventListener('click', function(){
+        changeDate(goTmrBtn);
+    });
+});
+////
+////////////////////////////////////////////////////////////////////////
