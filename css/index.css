@@ -12,8 +12,7 @@ body{
     color:#D14C4F;
     font-weight: 900;
     font-family: 'Noto Serif TC', serif;
-    /* max-width: 1200px;
-    margin: auto; */
+    cursor: default;
 }
 
 .container{
@@ -70,6 +69,7 @@ body{
     letter-spacing: 10px;
     grid-area: region;
     display: block;
+    cursor: pointer;
 }
 
 .regionNow::after{
@@ -162,6 +162,9 @@ body{
     content: "忌";
 }
 
+.goTmrBtn{
+    cursor: pointer;
+}
 
 .goTmrBtn>a{
     display: flex;
@@ -171,6 +174,9 @@ body{
 .regionMenu.active{
     opacity: 1;
     transition: all .3s;
+    position: fixed;
+    bottom: 0;
+    left: 0;
 }
 
 .region{
@@ -178,9 +184,7 @@ body{
     text-align: center;
 }
 
-.region :hover{
-    color:#D14C4F;
-}
+
 
 /* Grid Layout - parents*/
 .regionMenu{
@@ -191,11 +195,11 @@ body{
     background-color: #252525cb;
     color: #F4F5ED;
     position: fixed;
-    bottom: 0;
+    bottom: -50%;
     left: 0;
     font-weight: 700;
     z-index: 10;
-    opacity: 0;
+    opacity: .2;
     display: grid;
     grid-template-columns: repeat(4,1fr);
 }
@@ -246,6 +250,10 @@ body{
     }
     .region{
         color: #252525;
+        padding: 6px 10px;
+    }
+    .region :hover{
+        color:#D14C4F;
     }
     .weatherDataBlock{
         margin-left: 40px;

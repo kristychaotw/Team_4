@@ -11,3 +11,4 @@ function showRegionMenu(){
 
 const regionNow = document.querySelector('.regionNow');
 regionNow.addEventListener('click',showRegionMenu)
+
