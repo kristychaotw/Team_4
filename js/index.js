@@ -98,26 +98,6 @@ function calculateGoB(weatherInfo, date){
 
 //////////////////////////////////// View ////////////////////////////////////
 function render(weatherData) {
-    // let data = weatherData['regionWeather'][`${daytime}`];
-    // let dateDate = data["date"].split("-")[2];
-    // let dateMonth = data["date"].split("-")[1].split("")[1];
-    let data = weatherData['regionWeather']
-    let goodActivity = weatherData['GoB']['good'];
-    let goodIndex = Math.floor(Math.random() * goodActivity.length);
-    let badActivity = weatherData['GoB']['bad'];
-    let badIndex = Math.floor(Math.random() * badActivity.length);
-    document.getElementById("dateMonth").innerHTML = data['date']['month'];
-    document.getElementById("taiwanRegion").innerHTML = data['region'];
-    document.getElementById("Wx-text").innerHTML = data['Wx'];
-    document.getElementById("temp-text").innerHTML = data['MaxT'] + ' / ' + data['MinT'] +'°C' ;
-    document.getElementById("PoP-text").innerHTML = data['PoP'] + '%';
-    document.getElementById("CI-text").innerHTML = data['confort'];
-    document.getElementById("dateDate").innerHTML = data['date']['date'];
-    document.getElementById("goodActivity").innerHTML = goodActivity[goodIndex];
-    document.getElementById("badActivity").innerHTML = badActivity[badIndex];
-    // console.log(weatherData['regionWeather'][`${daytime}`]);
-    // console.log(weatherData['GoB']['good']);
-    // console.log(weatherData['GoB']['bad']); 
 }
 ////////////////////////////////////////////////////////////////////////
 
