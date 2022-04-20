@@ -2,7 +2,8 @@
 console.log('Hello');
 
 
-//// fetch weather information, needs to decide get today date or tomorrow date
+//// fetch weather information, needs to decide get today or tomorrow
+//// today = 0; tomorrow = 1
 async function fetchWeather(region, day){
     let url = `https://opendata.cwb.gov.tw/api/v1/rest/datastore/F-C0032-001?Authorization=CWB-281D376F-126F-4682-B710-E57FE26A8431&locationName=${region}`;
     let accurateDate;
@@ -11,13 +12,13 @@ async function fetchWeather(region, day){
     const rawData = await response.json();
 
     const records = rawData['records']['location'][0]['weatherElement'];
-    const Wx1 = records[0]['time'][day];
-    const PoP1 = records[1]['time'][day];
-    const MinT1 = records[2]['time'][day];
-    const CI1 = records[3]['time'][day];
-    const MaxT1 = records[4]['time'][day];
+    const Wx = records[0]['time'][day];
+    const PoP = records[1]['time'][day];
+    const MinT = records[2]['time'][day];
+    const CI = records[3]['time'][day];
+    const MaxT = records[4]['time'][day];
 
-    const regionWeather = [Wx1, PoP1, MinT1, CI1, MaxT1];
+    const regionWeather = [Wx, PoP, MinT, CI, MaxT];
 
     const wetherData = regionWeather.map((item) => {
         const {startTime, endTime, parameter} = item;
@@ -41,10 +42,10 @@ async function fetchWeather(region, day){
 
 
 ////  calculate GoB value to decide going out or not
-function calculateGoB(weatherInfo){
-    const wx = Number(weatherInfo['Wx']['parameterValue']) * 4;
-    const diff = Number(weatherInfo['MaxT']['parameterName'] - weatherInfo['MinT']['parameterName']) * 1;
-    const pop = Number(weatherInfo['PoP']['parameterName']) / 10 * 5;
+function calculateGoB(weatherData){
+    const wx = Number(weatherData['Wx']['parameterValue']) * 4;
+    const diff = Number(weatherData['MaxT']['parameterName'] - weatherData['MinT']['parameterName']) * 1;
+    const pop = Number(weatherData['PoP']['parameterName']) / 10 * 5;
     const GoB = (wx + diff + pop) / 10;
 
     if(GoB <= 4){
@@ -69,6 +70,7 @@ function calculateGoB(weatherInfo){
 
 
 //// controller ONLY needs to call this function to get all weather info
+//// e.g. getViewData('高雄', 0); today = 0; tomorrow = 1
 async function getViewData(region, day){
     const weatherData = await fetchWeather(region, day);
     const GoB = calculateGoB(weatherData);
