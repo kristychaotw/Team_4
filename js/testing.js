@@ -69,4 +69,4 @@ const init = async () => {
     re21 = calculateGoB(data21, 'today')
 }
 
-init();
+// init();
