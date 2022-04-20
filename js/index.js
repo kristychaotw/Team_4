@@ -136,7 +136,7 @@ async function changeReigon(regionBtn) {
 async function changeDate(goTmrBtn) {
     const region = document.querySelector('.regionNow').innerText;
     const day = Number(goTmrBtn.id);
-    goTmrBtn.id = (day==='0') ? '1': '0';
+    goTmrBtn.id = (day===0) ? '1': '0';
     
     const weatherData = await getViewData(region, day);
 
