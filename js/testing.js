@@ -1,72 +1,49 @@
 //// data diaplay
 const init = async () => {
-    // data = await fetchWeather('高雄市');
-    // re = calculateGoB(data, 'today');
     weatherData = await getViewData('高雄市', 0)
     console.log(weatherData)
 
-    // data1 = await fetchWeather('宜蘭縣');
-    // re1 = calculateGoB(data1, 'today')
+    weatherData1 = await getViewData('宜蘭縣', 0)
 
-    // data2 = await fetchWeather('花蓮縣');
-    // re2 = calculateGoB(data2, 'today')
+    weatherData2 = await getViewData('花蓮縣', 0)
 
-    // data3 = await fetchWeather('臺東縣');
-    // re3 = calculateGoB(data3, 'today')
+    weatherData3 = await getViewData('臺東縣', 0)
 
-    // data4 = await fetchWeather('澎湖縣');
-    // r4 = calculateGoB(data4, 'today')
+    weatherData4 = await getViewData('澎湖縣', 0)
 
-    // data5 = await fetchWeather('金門縣');
-    // re5 = calculateGoB(data5, 'today')
+    weatherData5 = await getViewData('金門縣', 0)
 
-    // data6 = await fetchWeather('連江縣');
-    // re6 = calculateGoB(data6, 'today')
+    weatherData6 = await getViewData('連江縣', 0)
 
-    // data7 = await fetchWeather('臺北市');
-    // re7 = calculateGoB(data7, 'today')
+    weatherData7 = await getViewData('臺北市', 0)
 
-    // data8 = await fetchWeather('新北市');
-    // re8 = calculateGoB(data8, 'today')
+    weatherData8 = await getViewData('新北市', 0)
 
-    // data9 = await fetchWeather('桃園市');
-    // re9 = calculateGoB(data9, 'today')
+    weatherData9 = await getViewData('桃園市', 0)
 
-    // data10 = await fetchWeather('臺中市');
-    // re10 = calculateGoB(data10, 'today')
+    weatherData10 = await getViewData('臺中市', 0)
 
-    // data11 = await fetchWeather('臺南市');
-    // re11 = calculateGoB(data11, 'today')
+    weatherData11 = await getViewData('臺南市', 0)
 
-    // data12 = await fetchWeather('基隆市');
-    // re12 = calculateGoB(data12, 'today')
+    weatherData12 = await getViewData('基隆市', 0)
 
-    // data13 = await fetchWeather('新竹縣');
-    // re13 = calculateGoB(data13, 'today')
+    weatherData13 = await getViewData('新竹縣', 0)
 
-    // data14 = await fetchWeather('新竹市');
-    // re14 = calculateGoB(data14, 'today')
+    weatherData14 = await getViewData('新竹市', 0)
 
-    // data15 = await fetchWeather('苗栗縣');
-    // re15 = calculateGoB(data15, 'today')
+    weatherData15 = await getViewData('苗栗縣', 0)
 
-    // data16 = await fetchWeather('彰化縣');
-    // re16 = calculateGoB(data16, 'today')
+    weatherData16 = await getViewData('彰化縣', 0)
 
-    // data17 = await fetchWeather('南投縣');
-    // re17 = calculateGoB(data17, 'today')
+    weatherData17 = await getViewData('南投縣', 0)
 
-    // data18= await fetchWeather('雲林縣');
-    // re18 = calculateGoB(data18, 'today')
+    weatherData18 = await getViewData('雲林縣', 0)
 
-    // data19 = await fetchWeather('嘉義縣');
-    // re19 = calculateGoB(data19, 'today')
+    weatherData19 = await getViewData('嘉義縣', 0)
 
-    // data20 = await fetchWeather('嘉義市');
-    // re20 = calculateGoB(data20, 'today')
+    weatherData20 = await getViewData('嘉義市', 0)
 
-    // data21 = await fetchWeather('屏東縣');
-    // re21 = calculateGoB(data21, 'today')
+    weatherData21 = await getViewData('屏東縣', 0)
 }
 
 init();
