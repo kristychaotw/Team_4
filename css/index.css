@@ -74,13 +74,13 @@ body{
     content:"";
     border-color: transparent transparent #D14C4F transparent;
     border-style: solid;
-    border-width: 0px 10px 20px 10px;
+    border-width: 0px 5px 10px 5px;
     height: 0px;
     width: 0px;
     writing-mode: horizontal-tb;
     font-size: 14px;
     display: block;
-    margin-top: 120px;
+    margin-top: 98px;
 
 }
 
