@@ -23,11 +23,12 @@ body{
 }
 
 .header{
-    background-color: #D14C4F;
+    background: linear-gradient(347.27deg, #B72F32 -101.33%, #D14C4F 42.43%);
     height: 60px;
     display: flex;
     justify-content: space-around;
     align-items: center;
+    border-bottom: 2px solid #A52A2D;
 }
 
 .title{
@@ -38,12 +39,6 @@ body{
     letter-spacing: 1px;
 }
 
-.circle{
-    background-color: #F3DC9A;
-    height: 30px;
-    width: 30px;
-    border-radius: 50%;
-}
 
 .subtitle{
     text-align: center;
