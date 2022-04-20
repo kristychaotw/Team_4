@@ -33,10 +33,10 @@ body{
 
 .title{
     font-size: 1.2rem;
-    font-weight: 700;
+    font-weight: 600;
     color: #F4F5ED;
     line-height: 60px;
-    letter-spacing: 1px;
+    letter-spacing: 5px;
 }
 
 
@@ -45,7 +45,7 @@ body{
     font-size: 0.9rem;
     font-weight: 400;
     grid-area: subtitle;
-    letter-spacing: 1px;
+    letter-spacing: 2px;
 }
 
 .month{
@@ -265,7 +265,7 @@ body{
         cursor: default;
     }
     .region{
-        color: #252525;
+        color: #333333;
         padding: 6px 10px;
     }
     .region :hover{
