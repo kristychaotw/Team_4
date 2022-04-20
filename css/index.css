@@ -132,18 +132,19 @@ body{
 
 .good,.bad{
     text-align: center;
-    padding: 3px 8px;
+    padding: 2px 8px;
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
 }
 
 .good{
-    line-height: 65px;
+    line-height: 60px;
     background-color: #D14C4F;
     border-radius: 50px;
     color: #F4F5ED;
-    font-size: 30px;
+    font-size: 28px;
     grid-area: good;
+    padding-right: 20px;
     
 }
 
@@ -156,6 +157,7 @@ body{
 
 .good::before{
     content: "宜";
+    padding-left: 20px;
 }
 
 .bad::before{
@@ -242,7 +244,7 @@ body{
     .regionMenu{
         grid-template-columns: repeat(5,1fr);
         opacity: 1;
-        margin-top:30px;
+        margin-top:20px;
         position:static;
         background-color: #F4F5ED;
         border-top: 3px solid #3d3d3d;
