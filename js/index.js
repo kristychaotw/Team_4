@@ -1,6 +1,10 @@
 //// Initalize js file
 console.log('Hello');
+let weatherData;
+////
 
+
+//////////////////////////////////// Model ////////////////////////////////////
 //// reorganize data structure
 function getFinalData(data, date){
     let accurateDate;
@@ -88,13 +92,24 @@ function calculateGoB(weatherInfo, date){
     return recommendation
 }
 ////
+////////////////////////////////////////////////////////////////////////
 
 
-//// update information while user press any other region
-async function changeReigon(region_btn) {
-    let region = region_btn.innerText;
+//////////////////////////////////// View ////////////////////////////////////
+function render(weatherData, daytime) {
+    console.log(weatherData['regionWeather'][`${daytime}`]);
+    console.log(weatherData['GoB']['good']);
+    console.log(weatherData['GoB']['bad']); 
+}
+////////////////////////////////////////////////////////////////////////
 
-    let weatherData = {
+
+//////////////////////////////////// Controller ////////////////////////////////////
+//// update information while user click on any other region
+async function changeReigon(regionBtn) {
+    let region = regionBtn.innerText;
+
+    weatherData = {
         regionWeather: null,
         GoB: null
     };
@@ -102,18 +117,54 @@ async function changeReigon(region_btn) {
     weatherData.regionWeather = await fetchWeather(region);
     weatherData.GoB = calculateGoB(weatherData.regionWeather, "today");
 
-    console.log(weatherData);
-
-    // render(weatherData);
+    render(weatherData, "today");
 }
 ////
 
 
-let regionBtns = document.getElementsByClassName('region');
-for(let i = 0; i < regionBtns.length; i++){
-    regionBtns[i].addEventListener('click', function(){
-        changeReigon(regionBtns[i]);
-    })
+//// update information while user click on goTmrBtn
+function changeDate(goTmrBtn) {
+    let daytime = (goTmrBtn.id==='0') ? "today": "tomorrow"
+    goTmrBtn.id = (goTmrBtn.id==='0') ? '1': '0';
+
+    weatherData.GoB = calculateGoB(weatherData.regionWeather, daytime);
+
+    render(weatherData, daytime);
 }
+////
 
 
+//// initialize page contents
+async function initializePage() {
+    weatherData = {
+        regionWeather: null,
+        GoB: null
+    };
+
+    weatherData.regionWeather = await fetchWeather("高雄市");
+    weatherData.GoB = calculateGoB(weatherData.regionWeather, "today");
+
+    render(weatherData, "today");
+}
+////
+
+
+//// after DOM contents are loaded, start to query interactable elements
+document.addEventListener("DOMContentLoaded",  () => {
+    initializePage();
+
+    let regionBtns = document.querySelectorAll('.region');
+    for(let i = 0; i < regionBtns.length; i++){
+        regionBtns[i].addEventListener('click', function(){
+            changeReigon(regionBtns[i]);
+        });
+    }
+
+    let goTmrBtn = document.querySelector('.goTmrBtn');
+    goTmrBtn.addEventListener('click', function(){
+        changeDate(goTmrBtn);
+    });
+});
+////
+
+////////////////////////////////////////////////////////////////////////
