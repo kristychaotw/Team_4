@@ -20,6 +20,7 @@ async function fetchWeather(region, day){
     const CI = records[3]['time'][day];
     const MaxT = records[4]['time'][day];
 
+
     const regionWeather = [Wx, PoP, MinT, CI, MaxT];
 
     const wetherData = regionWeather.map((item) => {
@@ -57,13 +58,13 @@ function calculateGoB(weatherData){
         }
     }else if(GoB >4 && GoB <7){
         recommendation = {
-            "good": ["睡到十點", "超市買泡麵", "看彭彭 YouTube 教學", "素顏出門", "不洗頭", ""],
-            "bad": ["睡到中午", "出門太久", "", "", "", ""],
+            "good": ["睡到十點", "超市買泡麵", "看彭彭 YouTube 教學", "素顏出門", "不洗頭", "出門逛街"],
+            "bad": ["睡到中午", "出門太久", "去海邊玩", "去基隆玩", "騎車出門", "出門不帶雨傘"],
         }
     }else{
         recommendation = {
             "good": ["叫 food panda", "躺在床上一整天", "睡到自然醒", "什麼事都不做", "看 Netflix", "熬夜寫程式"],
-            "bad": ["外出覓食", "換下睡衣", "3C 產品沒電", "離開床超過一小時", "", ""],
+            "bad": ["外出覓食", "換下睡衣", "3C 產品沒電", "離開床超過一小時", "戶外運動", "曬衣服"],
         }
     }
     return recommendation
@@ -100,7 +101,22 @@ async function getViewData(region, day){
 
 //////////////////////////////////// View ////////////////////////////////////
 function render(weatherData) {
-    console.log(weatherData);
+    let data = weatherData['regionWeather']
+    console.log(data)
+    let goodActivity = data['GoB']['good'];
+    let goodIndex = Math.floor(Math.random() * goodActivity.length);
+    let badActivity = data['GoB']['bad'];
+    let badIndex = Math.floor(Math.random() * badActivity.length);
+    document.getElementById("dateMonth").innerHTML = data['date']['month'];
+    document.getElementById("taiwanRegion").innerHTML = data['region'];
+    document.getElementById("Wx-text").innerHTML = data['Wx'];
+    document.getElementById("temp-text").innerHTML = data['MaxT'] + ' / ' + data['MinT'] +'°C' ;
+    document.getElementById("PoP-text").innerHTML = data['PoP'] + '%';
+    document.getElementById("CI-text").innerHTML = data['confort'];
+    document.getElementById("dateDate").innerHTML = data['date']['date'];
+    document.getElementById("goodActivity").innerHTML = goodActivity[goodIndex];
+    document.getElementById("badActivity").innerHTML = badActivity[badIndex];
+    // console.log(weatherData);
 }
 ////////////////////////////////////////////////////////////////////////
 
@@ -119,8 +135,8 @@ async function changeReigon(regionBtn) {
 //// update information while user click on goTmrBtn
 async function changeDate(goTmrBtn) {
     const region = document.querySelector('.regionNow').innerText;
-    const day = goTmrBtn.id;
-    goTmrBtn.id = (day==='0') ? '1': '0';
+    const day = Number(goTmrBtn.id);
+    goTmrBtn.id = (day===0) ? '1': '0';
     
     const weatherData = await getViewData(region, day);
 
@@ -136,6 +152,8 @@ async function initializePage() {
     render(weatherData);
 }
 ////
+
+
 
 
 //// after DOM contents are loaded, start to query interactable elements

@@ -8,6 +8,8 @@
     <link rel="stylesheet" type="text/css" href="css/index.css">
 
     <script type="text/javascript" src="js/index.js"></script>
+
+    <title>Document</title>
     <script type="text/javascript" src="js/testing.js"></script>
     <!-- Testing modle (Please remove it after the project is done) -->
     <title>天氣日曆</title>
@@ -22,18 +24,18 @@
     <div class="container">
         <div class="mainContent">
             <div class="subtitle">今天我該出門嗎？</div>
-            <div class="month">4</div>
-            <div class="regionNow">高雄市</div>
+            <div id="dateMonth" class="month"></div>
+            <div id="taiwanRegion" class="regionNow"></div>
             <div class="weatherDataBlock">
-                <div class="Wx">晴午後多雲局部雷</div>
-                <div class="T">35 / 30</div>
-                <div class="PoP">0%</div>
-                <div class="CI">晴午後多雲局部雨
+                <div id="Wx-text" class="Wx"></div>
+                <div id="temp-text" class="T"></div>
+                <div id="PoP-text" class="PoP"></div>
+                <div id="CI-text" class="CI">
                 </div>
             </div>
-            <div class="date">18</div>
-            <div class="good">看彭彭 YT 教學</div>
-            <div class="bad">睡一整天</div>
+            <div id="dateDate" class="date"></div>
+            <div id="goodActivity" class="good"></div>
+            <div id="badActivity" class="bad"></div>
         </div>
     </div>
     <div class="regionMenu">
