@@ -1,5 +1,6 @@
 //// Initalize js file
 console.log('Hello');
+////
 
 
 //////////////////////////////////// Model ////////////////////////////////////
@@ -71,7 +72,7 @@ function calculateGoB(weatherData){
 
 
 //// controller ONLY needs to call this function to get all weather info
-//// e.g. getViewData('高雄', 0); today = 0; tomorrow = 1
+//// e.g. getViewData("高雄市", 0); today = 0; tomorrow = 1
 async function getViewData(region, day){
     const weatherData = await fetchWeather(region, day);
     const GoB = calculateGoB(weatherData);
@@ -98,55 +99,41 @@ async function getViewData(region, day){
 
 
 //////////////////////////////////// View ////////////////////////////////////
-function render(weatherData, daytime) {
-    // console.log(weatherData['regionWeather'][`${daytime}`]);
-    // console.log(weatherData['GoB']['good']);
-    // console.log(weatherData['GoB']['bad']); 
+function render(weatherData) {
+    console.log(weatherData);
 }
 ////////////////////////////////////////////////////////////////////////
 
 
 //////////////////////////////////// Controller ////////////////////////////////////
 // update information while user click on any other region
-function changeReigon() {
-    let region = document.querySelector("#region-list").value;
+async function changeReigon(regionBtn) {
+    const region = regionBtn.innerText;
+    const weatherData = await getViewData(region, 0);
 
-    weatherData = {
-        regionWeather: null,
-        GoB: null
-    };
-
-    // weatherData.regionWeather = await fetchWeather(region);
-    // weatherData.GoB = calculateGoB(weatherData.regionWeather, "today");
-
-    render(weatherData, "today");
+    render(weatherData);
 }
 ////
 
 
 //// update information while user click on goTmrBtn
-function changeDate(goTmrBtn) {
-    let daytime = (goTmrBtn.id==='0') ? "today": "tomorrow"
-    goTmrBtn.id = (goTmrBtn.id==='0') ? '1': '0';
+async function changeDate(goTmrBtn) {
+    const region = document.querySelector('.regionNow').innerText;
+    const day = goTmrBtn.id;
+    goTmrBtn.id = (day==='0') ? '1': '0';
+    
+    const weatherData = await getViewData(region, day);
 
-    // weatherData.GoB = calculateGoB(weatherData.regionWeather, daytime);
-
-    render(weatherData, daytime);
+    render(weatherData);
 }
 ////
 
 
 //// initialize page contents
 async function initializePage() {
-    weatherData = {
-        regionWeather: null,
-        GoB: null
-    };
+    const weatherData = await getViewData("高雄市", 0);
 
-    // weatherData.regionWeather = await fetchWeather("高雄市");
-    // weatherData.GoB = calculateGoB(weatherData.regionWeather, "today");
-
-    render(weatherData, "today");
+    render(weatherData);
 }
 ////
 
@@ -167,4 +154,5 @@ document.addEventListener("DOMContentLoaded",  () => {
         changeDate(goTmrBtn);
     });
 });
+////
 ////////////////////////////////////////////////////////////////////////
