@@ -167,6 +167,9 @@ body{
 .goTmrBtn>a{
     display: flex;
     justify-content: end;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: -webkit-flex
 }
 
 .regionMenu.active{
