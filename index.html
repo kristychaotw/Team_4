@@ -1,15 +1,70 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="css/index.css">
+
     <script type="text/javascript" src="js/index.js"></script>
+
     <script type="text/javascript" src="js/view.js"></script>
     <title>Document</title>
+    <script type="text/javascript" src="js/testing.js"></script>
+    <!-- Testing modle (Please remove it after the project is done) -->
+    <title>天氣日曆</title>
 </head>
+
 <body>
-    <h1>Hello</h1>
+    <div class="header">
+        <div class="circle"></div>
+        <h1 class="title">天氣日曆</h1>
+        <div class="circle"></div>
+    </div>
+    <div class="container">
+        <div class="mainContent">
+            <div class="subtitle">今天我該出門嗎？</div>
+            <div id="dateMonth" class="month"></div>
+            <div id="taiwanRegion" class="regionNow">高雄市</div>
+            <div class="weatherDataBlock">
+                <div id="Wx-text" class="Wx"></div>
+                <div id="temp-text" class="T"></div>
+                <div id="PoP-text" class="PoP"></div>
+                <div id="CI-text" class="CI">
+                </div>
+            </div>
+            <div id="dateDate" class="date"></div>
+            <div id="goodActivity" class="good"></div>
+            <div id="badActivity" class="bad"></div>
+        </div>
+    </div>
+    <div class="regionMenu">
+        <div class="region">臺北市</div>
+        <div class="region">新北市</div>
+        <div class="region">基隆市</div>
+        <div class="region">桃園市</div>
+        <div class="region">新竹市</div>
+        <div class="region">新竹縣</div>
+        <div class="region">苗栗縣</div>
+        <div class="region">臺中市</div>
+        <div class="region">彰化縣</div>
+        <div class="region">南投縣</div>
+        <div class="region">雲林縣</div>
+        <div class="region">嘉義市</div>
+        <div class="region">嘉義縣</div>
+        <div class="region">臺南市</div>
+        <div class="region">高雄市</div>
+        <div class="region">屏東縣</div>
+        <div class="region">宜蘭縣</div>
+        <div class="region">花蓮縣</div>
+        <div class="region">臺東縣</div>
+        <div class="region">澎湖縣</div>
+        <div class="region">金門縣</div>
+        <div class="region">連江縣</div>
+    </div>
+    <div class="goTmrBtn" id="0"><a href="javascript:;"><img src="../Team_4/css/images/tmrbtn.svg"></a></div>
+    <script src="../Team_4/js/animation.js"></script>
 </body>
+
 </html>
