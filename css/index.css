@@ -69,13 +69,26 @@ body{
 }
 
 .regionNow::after{
-    content:"▲";
-    font-size: 18px;
+    /* content:"▲";
+    font-size: 18px; */
+    content:"";
+    border-color: transparent transparent #D14C4F transparent;
+    border-style: solid;
+    border-width: 0px 10px 20px 10px;
+    height: 0px;
+    width: 0px;
+    writing-mode: horizontal-tb;
+    font-size: 14px;
+    display: block;
+    margin-top: 120px;
+
 }
 
 .regionNow.active::after{
-    content:"▼";
-    font-size: 18px;
+    /* content:"▲";
+    font-size: 18px; */
+    transform: rotate(180deg);
+    transition: all .3s;
 }
 
 
