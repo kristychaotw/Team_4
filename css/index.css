@@ -81,7 +81,7 @@ body{
     font-size: 14px;
     display: block;
     margin-top: 98px;
-
+    transition: all .3s;
 }
 
 .regionNow.active::after{
@@ -215,6 +215,7 @@ body{
     opacity: 0;
     display: grid;
     grid-template-columns: repeat(4,1fr);
+    transition: all .9s;
 }
 
 
