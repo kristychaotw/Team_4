@@ -175,13 +175,16 @@ body{
 
 .goTmrBtn{
     cursor: pointer;
+    display: grid;
+    grid-template-columns: 1fr;
+    justify-items: end;
 }
-
+/* 
 .goTmrBtn{
     position: fixed;
     bottom: 0;
     right: 0;
-}
+} */
 
 
 .regionMenu.active{
@@ -291,10 +294,5 @@ body{
     }
     .bad{
         padding: 5px 0px;
-    }
-    .goTmrBtn{
-        position: fixed;
-        bottom: 0;
-        right: 0;
     }
 }
