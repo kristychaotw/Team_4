@@ -12,43 +12,40 @@ body{
     color:#D14C4F;
     font-weight: 900;
     font-family: 'Noto Serif TC', serif;
+    cursor: default;
 }
 
 .container{
     width: 84%;
     margin: auto;
-    padding: 30px 0;
+    padding: 30px 0 10px 0;
+    max-width: 1200px;
 }
 
 .header{
-    background-color: #D14C4F;
-    height: 80px;
+    background: linear-gradient(347.27deg, #B72F32 -101.33%, #D14C4F 42.43%);
+    height: 60px;
     display: flex;
     justify-content: space-around;
     align-items: center;
+    border-bottom: 2px solid #A52A2D;
 }
 
 .title{
     font-size: 1.2rem;
-    font-weight: 700;
+    font-weight: 600;
     color: #F4F5ED;
-    line-height: 80px;
-    letter-spacing: 1px;
+    line-height: 60px;
+    letter-spacing: 5px;
 }
 
-.circle{
-    background-color: #F3DC9A;
-    height: 30px;
-    width: 30px;
-    border-radius: 50%;
-}
 
 .subtitle{
     text-align: center;
     font-size: 0.9rem;
     font-weight: 400;
     grid-area: subtitle;
-    letter-spacing: 1px;
+    letter-spacing: 2px;
 }
 
 .month{
@@ -68,16 +65,30 @@ body{
     letter-spacing: 10px;
     grid-area: region;
     display: block;
+    cursor: pointer;
 }
 
 .regionNow::after{
-    content:"▲";
-    font-size: 18px;
+    /* content:"▲";
+    font-size: 18px; */
+    content:"";
+    border-color: transparent transparent #D14C4F transparent;
+    border-style: solid;
+    border-width: 0px 5px 10px 5px;
+    height: 0px;
+    width: 0px;
+    writing-mode: horizontal-tb;
+    font-size: 14px;
+    display: block;
+    margin-top: 98px;
+
 }
 
 .regionNow.active::after{
-    content:"▼";
-    font-size: 18px;
+    /* content:"▲";
+    font-size: 18px; */
+    transform: rotate(180deg);
+    transition: all .3s;
 }
 
 
@@ -130,55 +141,63 @@ body{
 
 .good,.bad{
     text-align: center;
-    padding: 3px 8px;
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
 }
 
 .good{
-    line-height: 65px;
+    padding: 5px 10px;
+    line-height: 40px;
     background-color: #D14C4F;
     border-radius: 50px;
     color: #F4F5ED;
-    font-size: 30px;
+    font-size: 26px;
     grid-area: good;
+    padding-right: 20px;
     
 }
 
 .bad{
-    font-size: 20px;
     padding: 5px 10px;
+    font-size: 18px;
     grid-area: bad;
     align-self: center;
 }
 
 .good::before{
     content: "宜";
+    padding-left: 20px;
 }
 
 .bad::before{
     content: "忌";
 }
 
-
-.goTmrBtn>a{
-    display: flex;
-    justify-content: end;
+.goTmrBtn{
+    cursor: pointer;
 }
+
+.goTmrBtn{
+    position: fixed;
+    bottom: 0;
+    right: 0;
+}
+
 
 .regionMenu.active{
     opacity: 1;
     transition: all .3s;
+    position: fixed;
+    bottom: 0;
+    left: 0;
 }
 
 .region{
     padding: 11px 10px;
     text-align: center;
+    cursor:pointer;
 }
 
-.region :hover{
-    color:#D14C4F;
-}
 
 /* Grid Layout - parents*/
 .regionMenu{
@@ -189,7 +208,7 @@ body{
     background-color: #252525cb;
     color: #F4F5ED;
     position: fixed;
-    bottom: 0;
+    bottom: -100%;
     left: 0;
     font-weight: 700;
     z-index: 10;
@@ -201,14 +220,15 @@ body{
 
 .mainContent{
     display: grid;
-    grid-template-columns: repeat(3,1fr);
+    /* grid-template-columns: repeat(3,1fr); */
+    grid-template-columns: 1fr 2fr 1fr;
     grid-template-rows: auto;
     grid-template-areas: "subtitle subtitle subtitle"
                          "month    data data"
                          "region data data"
                          ".     date ."
-                         "good     good good"
-                         "bad      bad  bad";
+                         "good    good good"
+                         ".       bad   .";
     grid-row-gap: 20px;
 }
 
@@ -235,17 +255,45 @@ body{
     .regionMenu{
         grid-template-columns: repeat(5,1fr);
         opacity: 1;
-        margin-top:30px;
         position:static;
         background-color: #F4F5ED;
         border-top: 3px solid #3d3d3d;
         border-bottom: 1px solid #3d3d3d;
         width: 83%;
     }
+
+    .regionMenu.active{
+        grid-template-columns: repeat(5,1fr);
+        opacity: 1;
+        position:static;
+        background-color: #F4F5ED;
+        border-top: 3px solid #3d3d3d;
+        border-bottom: 1px solid #3d3d3d;
+        width: 83%;
+    }
+
+    .regionNow{
+        cursor: default;
+    }
     .region{
-        color: #252525;
+        color: #333333;
+        padding: 6px 10px;
+    }
+    .region :hover{
+        color:#D14C4F;
     }
     .weatherDataBlock{
-        margin-left: 40px;
+        margin-left: 80px;
+    }
+    .good{
+        padding: 3px 20px;
+    }
+    .bad{
+        padding: 5px 0px;
+    }
+    .goTmrBtn{
+        position: fixed;
+        bottom: 0;
+        right: 0;
     }
 }

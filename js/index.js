@@ -12,7 +12,7 @@ let formalBadIndex = "";
 //// fetch weather information, needs to decide get today or tomorrow
 //// today = 0; tomorrow = 1
 async function fetchWeather(region, day){
-    let url = `https://opendata.cwb.gov.tw/api/v1/rest/datastore/F-C0032-001?Authorization=CWB-E56501E8-BE6A-4801-844D-34DAC510C679&locationName=${region}`;
+    let url = `https://opendata.cwb.gov.tw/api/v1/rest/datastore/F-C0032-001?Authorization=CWB-B0C178E1-A2D1-4527-901A-22727190CF5E&locationName=${region}`;
     let accurateDate;
 
     const response = await fetch(url);
@@ -65,7 +65,7 @@ function calculateGoB(weatherData){
         }
     }else if(GoB >4 && GoB <7){
         recommendation = {
-            "good": ["睡到十點", "超市買泡麵", "看彭彭 YouTube 教學", "素顏出門", "不洗頭", "出門逛街"],
+            "good": ["睡到十點", "超市買泡麵", "看彭彭 YT 教學", "素顏出門", "不洗頭", "出門逛街"],
             "bad": ["睡到中午", "出門太久", "去海邊玩", "去基隆玩", "騎車出門", "出門不帶雨傘"],
         }
     }else{

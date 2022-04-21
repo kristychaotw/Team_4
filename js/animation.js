@@ -1,5 +1,5 @@
-//// regionNow click animation - show regionMenu 
-document.querySelector('.regionNow').addEventListener("click",function(){
+// show regionMenu when click regionNow
+function showRegionMenu(){
     if(this.classList.contains('active')){
         this.classList.remove('active')
         document.querySelector('.regionMenu').classList.remove('active')
@@ -7,4 +7,10 @@ document.querySelector('.regionNow').addEventListener("click",function(){
         this.classList.add('active')
         document.querySelector('.regionMenu').classList.add('active')
     }
-})
+}
+
+const regionNow = document.querySelector('.regionNow');
+regionNow.addEventListener('click',showRegionMenu)
+
+
+
