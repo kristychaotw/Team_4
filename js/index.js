@@ -1,5 +1,10 @@
 //// Initalize js file
-console.log('Hello');
+// console.log('Hello');
+
+
+////avoid same index
+let formalGoodIndex = "";
+let formalBadIndex = "";
 ////
 
 
@@ -50,10 +55,12 @@ function calculateGoB(weatherData){
     const diff = Number(weatherData['MaxT']['parameterName'] - weatherData['MinT']['parameterName']) * 1;
     const pop = Number(weatherData['PoP']['parameterName']) / 10 * 5;
     const GoB = (wx + diff + pop) / 10;
+    let trip = weatherData['region'] + '一日遊';
+
 
     if(GoB <= 4){
         recommendation = {
-            "good": ["一日遊", "外出吃美食", "欣賞歷史古蹟", "外出購物振興經濟", "到南部玩", "洗衣曬被"],
+            "good": [trip, "外出吃美食", "欣賞歷史古蹟", "外出購物振興經濟", "到南部玩", "洗衣曬被"],
             "bad": ["睡一整天", "叫 food panda", "在家寫程式", "在家吃泡麵", "網購逛蝦皮", "看 Netflix"],
         }
     }else if(GoB >4 && GoB <7){
@@ -68,6 +75,7 @@ function calculateGoB(weatherData){
         }
     }
     return recommendation
+    
 }
 ////
 
@@ -100,13 +108,9 @@ async function getViewData(region, day){
 
 
 //////////////////////////////////// View ////////////////////////////////////
+////render view
 function render(weatherData) {
     let data = weatherData['regionWeather']
-    console.log(data)
-    let goodActivity = data['GoB']['good'];
-    let goodIndex = Math.floor(Math.random() * goodActivity.length);
-    let badActivity = data['GoB']['bad'];
-    let badIndex = Math.floor(Math.random() * badActivity.length);
     document.getElementById("dateMonth").innerHTML = data['date']['month'];
     document.getElementById("taiwanRegion").innerHTML = data['region'];
     document.getElementById("Wx-text").innerHTML = data['Wx'];
@@ -114,10 +118,72 @@ function render(weatherData) {
     document.getElementById("PoP-text").innerHTML = data['PoP'] + '%';
     document.getElementById("CI-text").innerHTML = data['confort'];
     document.getElementById("dateDate").innerHTML = data['date']['date'];
-    document.getElementById("goodActivity").innerHTML = goodActivity[goodIndex];
-    document.getElementById("badActivity").innerHTML = badActivity[badIndex];
-    // console.log(weatherData);
+    getGoodIndex(weatherData);
+    getBadIndex(weatherData);
+
 }
+////
+
+
+////avoid same index in goodActivity
+function getGoodIndex(weatherData){
+    let data = weatherData['regionWeather']
+    let goodActivity = data['GoB']['good'];
+    let index = Math.floor(Math.random() * goodActivity.length);
+    let goodToDo = document.getElementById("goodActivity");
+    if(index == formalGoodIndex){
+        let newIndex = index + 1;
+        if(newIndex == goodActivity.length){
+            newIndex = 0;
+            goodToDo.innerHTML = goodActivity[newIndex];
+            formalGoodIndex = newIndex;
+            return formalGoodIndex;
+        }else{
+            goodToDo.innerHTML = goodActivity[newIndex];
+            formalGoodIndex = newIndex;
+            return formalGoodIndex;
+        }
+    }else{
+        goodToDo.innerHTML = goodActivity[index]; 
+        formalGoodIndex = index;
+        return formalGoodIndex;
+    }
+}
+////
+
+
+////avoid same index in badActivity
+function getBadIndex(weatherData){
+    let data = weatherData['regionWeather']
+    let badActivity = data['GoB']['bad'];
+    let index = Math.floor(Math.random() * badActivity.length);
+    let badToDo = document.getElementById("badActivity");
+    if(index == formalBadIndex){
+        let newIndex = index + 1;
+        if(newIndex == badActivity.length){
+            newIndex = 0;
+            badToDo.innerHTML = badActivity[newIndex];
+            formalBadIndex = newIndex;
+            return formalBadIndex;
+        }else{
+            badToDo.innerHTML = badActivity[newIndex];
+            formalBadIndex = newIndex;
+            return formalBadIndex;
+        }
+    }else{
+        badToDo.innerHTML = badActivity[index];
+        formalBadIndex = index;
+        return formalBadIndex;
+    }
+}
+////
+
+
+////
+function deActive(){
+    document.querySelector('.regionMenu').classList.remove('active');
+}
+////
 ////////////////////////////////////////////////////////////////////////
 
 
@@ -126,7 +192,7 @@ function render(weatherData) {
 async function changeReigon(regionBtn) {
     const region = regionBtn.innerText;
     const weatherData = await getViewData(region, 0);
-
+    deActive();
     render(weatherData);
 }
 ////
