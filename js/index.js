@@ -1,11 +1,9 @@
-//// Initalize js file
-// console.log('Hello');
-
-
-////avoid same index
+//////////////////////////////////// Global variables ////////////////////////////////////
+//// avoid same index
 let formalGoodIndex = "";
 let formalBadIndex = "";
 ////
+////////////////////////////////////////////////////////////////////////
 
 
 //////////////////////////////////// Model ////////////////////////////////////
@@ -108,7 +106,7 @@ async function getViewData(region, day){
 
 
 //////////////////////////////////// View ////////////////////////////////////
-////render view
+//// render view
 function render(weatherData) {
     let data = weatherData['regionWeather']
     document.getElementById("dateMonth").innerHTML = data['date']['month'];
@@ -125,7 +123,7 @@ function render(weatherData) {
 ////
 
 
-////avoid same index in goodActivity
+//// avoid same index in goodActivity
 function getGoodIndex(weatherData){
     let data = weatherData['regionWeather']
     let goodActivity = data['GoB']['good'];
@@ -152,7 +150,7 @@ function getGoodIndex(weatherData){
 ////
 
 
-////avoid same index in badActivity
+//// avoid same index in badActivity
 function getBadIndex(weatherData){
     let data = weatherData['regionWeather']
     let badActivity = data['GoB']['bad'];
@@ -179,21 +177,35 @@ function getBadIndex(weatherData){
 ////
 
 
-////
-function deActive(){
+//// make regionMenu invisible
+function DeactiveRegionMenu(){
     document.querySelector('.regionMenu').classList.remove('active');
     document.querySelector('.regionNow').classList.remove('active');
+}
+////
+
+
+//// show RegionMenu when user click on regionNow
+function showRegionMenu(){
+    if (this.classList.contains('active')) {
+        this.classList.remove('active');
+        document.querySelector('.regionMenu').classList.remove('active');
+    } else {
+        this.classList.add('active');
+        document.querySelector('.regionMenu').classList.add('active');
+    }
 }
 ////
 ////////////////////////////////////////////////////////////////////////
 
 
 //////////////////////////////////// Controller ////////////////////////////////////
-// update information while user click on any other region
+//// update information while user click on any other region
 async function changeReigon(regionBtn) {
     const region = regionBtn.innerText;
     const weatherData = await getViewData(region, 0);
-    deActive();
+
+    DeactiveRegionMenu();
     render(weatherData);
 }
 ////
@@ -221,23 +233,24 @@ async function initializePage() {
 ////
 
 
-
-
 //// after DOM contents are loaded, start to query interactable elements
 document.addEventListener("DOMContentLoaded",  () => {
     initializePage();
 
-    let regionBtns = document.querySelectorAll('.region');
+    const regionBtns = document.querySelectorAll('.region');
     for(let i = 0; i < regionBtns.length; i++){
         regionBtns[i].addEventListener('click', function(){
             changeReigon(regionBtns[i]);
         });
     }
 
-    let goTmrBtn = document.querySelector('.goTmrBtn');
+    const goTmrBtn = document.querySelector('.goTmrBtn');
     goTmrBtn.addEventListener('click', function(){
         changeDate(goTmrBtn);
     });
+
+    const regionNow = document.querySelector('.regionNow');
+    regionNow.addEventListener('click', showRegionMenu);
 });
 ////
 ////////////////////////////////////////////////////////////////////////
