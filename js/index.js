@@ -60,18 +60,18 @@ function calculateGoB(weatherData){
 
     if(GoB <= 4){
         recommendation = {
-            "good": [trip, "外出吃美食", "欣賞歷史古蹟", "外出購物振興經濟", "到南部玩", "洗衣曬被"],
-            "bad": ["睡一整天", "叫 food panda", "在家寫程式", "在家吃泡麵", "網購逛蝦皮", "看 Netflix"],
+            "good": [trip, "外出吃美食", "欣賞歷史古蹟", "外出購物振興經濟", "到南部玩", "洗衣曬被", "做好防曬", "吃冰淇淋", "遊山玩水", "到柴山看猴子", "帶狗狗出門玩", "參加朋友聚會"],
+            "bad": ["睡一整天", "叫 food panda", "在家寫程式", "在家吃泡麵", "網購逛蝦皮", "看 Netflix", "用功讀書", "刷 Leetcode", "看 104","睡到快長高", "刷 CodeForce", "忽略熱指數",],
         }
     }else if(GoB >4 && GoB <7){
         recommendation = {
-            "good": ["睡到十點", "超市買泡麵", "看彭彭 YT 教學", "素顏出門", "不洗頭", "出門逛街"],
-            "bad": ["睡到中午", "出門太久", "去海邊玩", "去基隆玩", "騎車出門", "出門不帶雨傘"],
+            "good": ["睡到十點", "超市買泡麵", "看彭彭 YT 教學", "素顏出門", "不洗頭", "出門逛街", "吃吃喝喝", "喝下午茶", "看電影", "唱歌", "看 Udemy 課程", "逛書店",],
+            "bad": ["睡到中午", "出門太久", "去海邊玩", "去基隆玩", "騎車出門", "出門不帶雨傘", "看悲傷電影", "忽略紫外線指數", "與人爭執", "出門不帶錢包", "不參加朋友聚會", "下車輸贏",],
         }
     }else{
         recommendation = {
-            "good": ["叫 food panda", "躺在床上一整天", "睡到自然醒", "什麼事都不做", "看 Netflix", "熬夜寫程式"],
-            "bad": ["外出覓食", "換下睡衣", "3C 產品沒電", "離開床超過一小時", "戶外運動", "曬衣服"],
+            "good": ["叫 food panda", "躺在床上一整天", "睡到自然醒", "什麼事都不做", "看 Netflix", "熬夜寫程式", "吸狗吸貓吸兔子", "開喝", "玩桌遊", "搶 PS5", "玩 Switch", "看 Disney+",],
+            "bad": ["外出覓食", "換下睡衣", "3C 產品沒電", "離開床超過一小時", "戶外運動", "曬衣服", "修剪花草", "搬家", "登山衝浪", "泛舟", "帶狗狗出門", "騎車上班",],
         }
     }
     return recommendation
@@ -182,6 +182,7 @@ function getBadIndex(weatherData){
 ////
 function deActive(){
     document.querySelector('.regionMenu').classList.remove('active');
+    document.querySelector('.regionNow').classList.remove('active');
 }
 ////
 ////////////////////////////////////////////////////////////////////////
@@ -200,9 +201,9 @@ async function changeReigon(regionBtn) {
 
 //// update information while user click on goTmrBtn
 async function changeDate(goTmrBtn) {
-    const region = document.querySelector('.regionNow').innerText;
+    goTmrBtn.id = (goTmrBtn.id==='0') ? '1': '0';
     const day = Number(goTmrBtn.id);
-    goTmrBtn.id = (day===0) ? '1': '0';
+    const region = document.querySelector('.regionNow').innerText;
     
     const weatherData = await getViewData(region, day);
 
