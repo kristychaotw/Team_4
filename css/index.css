@@ -177,13 +177,12 @@ body{
     cursor: pointer;
 }
 
-.goTmrBtn>a{
-    display: flex;
-    justify-content: end;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: -webkit-flex
+.goTmrBtn{
+    position: fixed;
+    bottom: 0;
+    right: 0;
 }
+
 
 .regionMenu.active{
     opacity: 1;
@@ -198,7 +197,6 @@ body{
     text-align: center;
     cursor:pointer;
 }
-
 
 
 /* Grid Layout - parents*/
