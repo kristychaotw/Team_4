@@ -1,5 +1,5 @@
-![weather1](https://user-images.githubusercontent.com/95632624/173239922-a1b6d87b-8cbb-4ab3-83a1-85320e7dd632.gif)
-![weather3](https://user-images.githubusercontent.com/95632624/173241036-6519a9ae-e9a6-4038-9bff-13b04df036a0.gif)
+
+![weather1](https://user-images.githubusercontent.com/95632624/173239922-a1b6d87b-8cbb-4ab3-83a1-85320e7dd632.gif)|![weather3](https://user-images.githubusercontent.com/95632624/173241036-6519a9ae-e9a6-4038-9bff-13b04df036a0.gif)
 
 ### 🚀 [天氣日曆 Weahter Calendar](https://hsini65018.github.io/Team_4/)
 
@@ -19,10 +19,10 @@
 * JavaScript
 * MVC model
 
-### Develop by
+## Develop by
 WeHelp BootCamp s2 team 4 
 團隊合作專案
 
-### Contribution
+## Contribution
 我主要負責靜態畫面設計與CSS coding.
 
